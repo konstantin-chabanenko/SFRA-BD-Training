@@ -1,3 +1,7 @@
+<isset name="defaultPrice" value="${price.list.decimalPrice}" scope="page" />
+<isset name="salePrice" value="${price.sales.decimalPrice}" scope="page" />
+<isset name="discountValue" value="${((defaultPrice - salePrice) / defaultPrice) * 100}" scope="page" />
+
 <isif condition="${price.type === 'tiered'}">
     <div class="price">
         <isinclude template="/product/components/pricing/tiered" />
@@ -6,9 +10,14 @@
     <div class="price"  itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer"">
         <isinclude template="/product/components/pricing/range" />
     </div>
-<iselse>
+<iselse/>
     <div class="price"  itemprop="offers" itemscope itemtype="http://schema.org/Offer">
         <isset name="isLowPrice" value="${}" scope="page" />
         <isinclude template="/product/components/pricing/default" />
     </div>
+    <isif condition=${defaultPrice !== null && salePrice !== null}>
+        <div class="discount-text text-uppercase font-weight-bold" style="color: red">
+            ${Resource.msg("discount.text", "common", null)} <isprint value="${discountValue}" style="INTEGER" /> % ${Resource.msg("discount.off", "common", null)}
+        </div>
+    </isif>
 </isif>
