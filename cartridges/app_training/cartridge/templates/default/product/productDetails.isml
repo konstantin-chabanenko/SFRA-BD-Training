@@ -111,8 +111,12 @@
 
             <isinclude template="product/components/descriptionAndDetails" />
 
-            <div class="recommendations">
-                <isslot id="product-recommendations-m" description="Recommended products" context="global" />
+            <div class="recommendations row">
+                <isloop items="${pdict.sorted}" var="product">
+                    <div class="col-6 col-sm-3">
+                        <isinclude url="${URLUtils.url('Tile-Show', 'pid', product.productID, 'swatches', true, 'ratings', true)}" />
+                    </div>
+                </isloop>
             </div>
         </div>
     </isobject>
