@@ -61,6 +61,14 @@
                         </isif>
                     </isloop>
                     <isinclude template="cart/cartApproachingDiscount" />
+                    <isif condition="${!empty(pdict.thresholdPrice) && !empty(pdict.grandTotal)}">
+                        <isset name="showMsg" value="${pdict.thresholdPrice < pdict.grandTotal}" scope="page" />
+                        <isif condition="${showMsg}">
+                            <div class="warning-message" style="width: 70%; background-color: #f2b100">
+                                ${Resource.msg("custom.msg", "cart", null)} <isprint value="${pdict.thresholdPrice}" encoding="off" />!
+                            </div>
+                        </isif>
+                    </isif>
                 </div>
                 <!---totals, and checkout actions--->
                 <div class="col-sm-5 col-md-4 totals">
