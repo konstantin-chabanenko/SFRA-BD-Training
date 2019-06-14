@@ -1,2 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jobs xmlns="http://www.demandware.com/xml/impex/jobs/2015-07-01"/>
+<jobs xmlns="http://www.demandware.com/xml/impex/jobs/2015-07-01">
+    <job job-id="CategoryAssignation" priority="0">
+        <description/>
+        <parameters/>
+        <flow>
+            <context site-id="RefArch"/>
+            <step step-id="CategoryAssignation-Start" type="ExecuteScriptModule" enforce-restart="true">
+                <description/>
+                <parameters>
+                    <parameter name="ExecuteScriptModule.Module">app_training/cartridge/scripts/jobs/CategoryAssignation.js</parameter>
+                    <parameter name="ExecuteScriptModule.FunctionName">execute</parameter>
+                    <parameter name="ExecuteScriptModule.Transactional">false</parameter>
+                    <parameter name="brand">Nikon</parameter>
+                    <parameter name="categoryId">womens-clothing-tops</parameter>
+                </parameters>
+            </step>
+        </flow>
+        <flow>
+            <context site-id="Sites"/>
+            <step step-id="cat-assignation-import" type="ImportCatalog" enforce-restart="false">
+                <description/>
+                <parameters>
+                    <parameter name="WorkingFolder">instance/</parameter>
+                    <parameter name="FileNamePattern">CategoryAssignment.xml</parameter>
+                    <parameter name="NoFilesFoundHandling">NO_FILES_FOUND</parameter>
+                    <parameter name="ImportMode">Merge</parameter>
+                    <parameter name="ImportFailedHandling">WARN</parameter>
+                    <parameter name="AfterImportFileHandling">Archive</parameter>
+                    <parameter name="ArchiveFolder">archive</parameter>
+                </parameters>
+            </step>
+        </flow>
+        <rules/>
+        <triggers>
+            <run-once enabled="false">
+                <date>2019-06-14Z</date>
+                <time>07:40:19.000Z</time>
+            </run-once>
+        </triggers>
+    </job>
+
+</jobs>
