@@ -1,0 +1,11 @@
+<isdecorate template="common/layout/page">
+<div class="container">
+    <div class="row">
+        <isloop items="${pdict.content.items}" var="item">
+            <div class="col-4">
+                <img src="${item.media.m}" alt="${item.title}" />
+            </div>
+        </isloop>
+    </div>
+</div>
+</isdecorate>
