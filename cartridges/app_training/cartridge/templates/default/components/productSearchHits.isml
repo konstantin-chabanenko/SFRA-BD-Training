@@ -1,0 +1,13 @@
+<isdecorate template="common/layout/page">
+<div class="container">
+    <div class="row">
+        <isloop items="${pdict.products}" var="product" status="loopState">
+            <div class="col-6 col-sm-3">
+                <isobject object="${product}" view="searchhit">
+                    <isinclude url="${URLUtils.url('Tile-Show', 'pid', product.product_id + 'M', 'swatches', true, 'ratings', true)}" />
+                </isobject>
+            </div>
+        </isloop>
+    </div>
+</div>
+</isdecorate>
